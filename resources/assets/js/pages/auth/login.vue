@@ -6,7 +6,7 @@
     <!-- <img src="img/student_login1.png" alt="Log-in"> -->
 
     </div>    
-    <div class="col-lg-5 m-auto">
+    <div class="col-lg-6 m-auto">
       <card :title="$t('login')">
         <form @submit.prevent="login" @keydown="form.onKeydown($event)">
           <!-- Email -->
