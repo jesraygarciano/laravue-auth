@@ -1,11 +1,14 @@
 <template>
-  <div class="main-layout">
-    <navbar/>
+    <div class="main-layout">
+      <div class="land-cover" id="land-cover">
+      <navbar/>
 
-    <div class="container mt-4">
-      <child/>
+      </div>
+
+      <div class="container mt-4">
+        <child/>
+      </div>
     </div>
-  </div>
 </template>
 
 <script>

@@ -1,104 +1,106 @@
 <template>
-  <div class="row login-bg">
 
-  <div class="col-lg-5 login-in">
-    
-    <!-- <img src="img/student_login1.png" alt="Log-in"> -->
 
-    </div>    
-    <div class="col-lg-6 m-auto">
-      <card :title="$t('login')">
-        <form @submit.prevent="login" @keydown="form.onKeydown($event)">
-          <!-- Email -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
-              <has-error :form="form" field="email"/>
+  <div class="row company-list">
+
+    <div class="col-md-3">
+      <div style="height:100px;background-color: gray;">
+
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-12 text-center">
+
+          <div class="card mb-3">
+            <h3 class="card-header">Card header</h3>
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+            </div>
+            <img style="height: 200px; width: 100%; display: block;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22318%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20318%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_158bd1d28ef%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_158bd1d28ef%22%3E%3Crect%20width%3D%22318%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22129.359375%22%20y%3D%2297.35%22%3EImage%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+              alt="Card image">
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Cras justo odio</li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+            <div class="card-footer text-muted">
+              2 days ago
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Card title</h4>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
             </div>
           </div>
 
-          <!-- Password -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('password') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
-              <has-error :form="form" field="password"/>
-            </div>
-          </div>
-
-          <!-- Remember Me -->
-          <div class="form-group row">
-            <div class="col-md-3"/>
-            <div class="col-md-7 d-flex">
-              <checkbox v-model="remember" name="remember">
-                {{ $t('remember_me') }}
-              </checkbox>
-
-              <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto">
-                {{ $t('forgot_password') }}
-              </router-link>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-md-7 offset-md-3 d-flex">
-              <!-- Submit Button -->
-              <v-button :loading="form.busy">
-                {{ $t('login') }}
-              </v-button>
-
-              <!-- GitHub Login Button -->
-              <login-with-github/>
-            </div>
-          </div>
-        </form>
-      </card>
+        </div>
+      </div>
     </div>
   </div>
+
 </template>
 
 <script>
-import Form from 'vform'
-import LoginWithGithub from '~/components/LoginWithGithub'
+  import Form from "vform";
+  import LoginWithGithub from "~/components/LoginWithGithub";
 
+  export default {
+    middleware: "guest",
 
-export default {
-  middleware: 'guest',
+    components: {
+      LoginWithGithub
+    },
 
-  components: {
-    LoginWithGithub
-  },
+    metaInfo() {
+      return {
+        title: this.$t("login")
+      };
+    },
 
-  metaInfo () {
-    return { title: this.$t('login') }
-  },
-
-  data: () => ({
-    form: new Form({
-      email: '',
-      password: ''
+    data: () => ({
+      form: new Form({
+        email: "",
+        password: ""
+      }),
+      remember: false
     }),
-    remember: false
-  }),
 
-  methods: {
-    async login () {
-      // Submit the form.
-      const { data } = await this.form.post('/api/login')
+    methods: {
+      async login() {
+        // Submit the form.
+        const {
+          data
+        } = await this.form.post("/api/login");
 
-      // Save the token.
-      this.$store.dispatch('auth/saveToken', {
-        token: data.token,
-        remember: this.remember
-      })
+        // Save the token.
+        this.$store.dispatch("auth/saveToken", {
+          token: data.token,
+          remember: this.remember
+        });
 
-      // Fetch the user.
-      await this.$store.dispatch('auth/fetchUser')
+        // Fetch the user.
+        await this.$store.dispatch("auth/fetchUser");
 
-      // Redirect home.
-      this.$router.push({ name: 'home' })
+        // Redirect home.
+        this.$router.push({
+          name: "home"
+        });
+      }
     }
-  }
-}
+  };
+
 </script>

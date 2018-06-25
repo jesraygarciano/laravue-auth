@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="landing-cover" id="landing-cover">
+    <div class="landing-cover" id="landing-cover"> <!--Gart-->
       <div class="top-right links">
         <template v-if="authenticated">
           <router-link :to="{ name: 'home' }">
@@ -33,6 +33,7 @@
       </div>
     </div>
   </div>
+  
 </template>
 
 <script>
